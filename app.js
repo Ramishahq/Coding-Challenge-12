@@ -39,3 +39,38 @@ canvas.addEventListener('mouseout', () => {
     ctx.closePath();
 });
 
+// Task 3: Draw shape based on selected option
+function drawShape(mouseX, mouseY) {
+    const shape = getSelectedShape();
+    const color = colorInput.value;
+
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+
+    ctx.beginPath();
+    if (shape === 'line') {
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(mouseX, mouseY);
+    } else if (shape === 'rectangle') {
+        ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
+    } else if (shape === 'circle') {
+        const radius = Math.sqrt(Math.pow(mouseX - startX, 2) + Math.pow(mouseY - startY, 2));
+        ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+    }
+    ctx.stroke();
+    ctx.closePath(); 
+}
+
+// Clear the canvas function
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// function to get option to select shape
+function getSelectedShape() {
+    for (const option of shapeOptions) {
+        if (option.checked) {
+            return option.value;
+        }
+    }
+}
