@@ -74,3 +74,10 @@ function getSelectedShape() {
         }
     }
 }
+
+// Task 4: Clear the canvas
+clearButton.addEventListener('click', clearCanvas);
+function getMousePosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    return [e.clientX - rect.left, e.clientY - rect.top];
+}
